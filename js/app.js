@@ -187,60 +187,68 @@ Calculadora = (function () {
   }
 })();
 
-function cambiotamaño(e) {
-  document.getElementById(e).style="padding:5px 5px";
+function reduceTamaño(e) {
+  document.getElementById(e).style="padding:2px 2px";
+}
+function normalizaTamaño(e) {
   document.getElementById(e).style="padding:0px 0px";
 }
+
 //metodo comun
 var elemento = document.querySelectorAll('.tecla')
 
 for (var i = 0; i < elemento.length; i++) {
   var x = elemento[i]
 
+  x.onmousedown = function(x) {
+    var id = x.target.id
+
+    reduceTamaño(id);
+  };
+
   x.addEventListener('click', function(x) {
     var valor = x.target.id
+
     switch (valor) {
       case "on":
-        cambiotamaño(valor);
         Calculadora.inicializa();
         break;
       case "punto":
-        cambiotamaño(valor);
         Calculadora.punto();
         break;
       case "igual":
-        cambiotamaño(valor);
         Calculadora.total();
         break;
       case "mas":
-        cambiotamaño(valor);
         Calculadora.suma();
         break;
       case "menos":
-        cambiotamaño(valor);
         Calculadora.resta();
         break;
       case "por":
-        cambiotamaño(valor);
         Calculadora.multiplica();
         break;
       case "dividido":
-        cambiotamaño(valor);
         Calculadora.divide();
         break;
       case "sign":
-        cambiotamaño(valor);
         Calculadora.signo();
         break;
       case "raiz":
-        cambiotamaño(valor);
+        //lo agrego unicamente para poder valorar solo las teclas numericas en el default
         break;
       default:
-        cambiotamaño(valor);
         Calculadora.concatena(valor);
         break;
     }
+
   });
+
+  x.onmouseup = function(x) {
+    var id = x.target.id
+
+    normalizaTamaño(id);
+  };
 }
 
 

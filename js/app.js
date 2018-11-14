@@ -42,19 +42,16 @@ Calculadora = (function () {
 
     } else {
       ResOperacion = strPantalla;
-      //bolRealizaOpe = true;
     };
 
     if (bolDigiteIgual == false) {
-      NvoPantalla(strPantalla);
+      NvoPantalla("");
     } else {
       NvoPantalla(ResOperacion);
-      //bolDigiteIgual = false;
       bolRealizaOpe = false;
     }
     strResultado = ResOperacion;
     strPantalla = ResOperacion;
-
   }
 
   function NvoPantalla(NvoPantalla) {
@@ -187,25 +184,29 @@ Calculadora = (function () {
   }
 })();
 
+//Funcion que reduce el tamaño de las teclas
 function reduceTamaño(e) {
   document.getElementById(e).style="padding:2px 2px";
 }
+//Funcion que normaliza el tamaño de las teclas
 function normalizaTamaño(e) {
   document.getElementById(e).style="padding:0px 0px";
 }
 
-//metodo comun
+//Seleccion de elementos "Tecla"
 var elemento = document.querySelectorAll('.tecla')
 
+//Recorro todos los elmentos para asignar su "listener del evento click"
 for (var i = 0; i < elemento.length; i++) {
   var x = elemento[i]
 
+  //Al "presionar" el click del mouse
   x.onmousedown = function(x) {
     var id = x.target.id
-
     reduceTamaño(id);
   };
 
+  //listener del evento click de cada tecla.
   x.addEventListener('click', function(x) {
     var valor = x.target.id
 
@@ -244,9 +245,9 @@ for (var i = 0; i < elemento.length; i++) {
 
   });
 
+  //Al "soltar" el click del mouse
   x.onmouseup = function(x) {
     var id = x.target.id
-
     normalizaTamaño(id);
   };
 }
